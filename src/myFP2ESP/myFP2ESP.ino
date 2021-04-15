@@ -1592,6 +1592,11 @@ void loop()
           oled = oled_off;
           DebugPrint("Save config");
         }
+        if (mySetupData->SaveBoardConfiguration())                                   // save board config if needed
+        {
+          oled = oled_off;
+          DebugPrint("Save Board config");
+        }
 
         update_pushbuttons();
 

@@ -562,6 +562,10 @@ void DriverBoard::initmove(bool mdir, unsigned long steps)
     Board_DebugPrintln("Can't set myfp2Timer correctly. Select another freq. or interval");
   }
 #else
+  if ( boardnum == PRO2ESP32DRV8825 )                            // If ESP32 with DRV8825
+  {
+    driverboard->setstepmode(mySetupData->get_brdstepmode());    // Set Motor Stepmode 
+  }
   // Use 1st timer of 4 (counted from zero).
   // Set 80 divider for prescaler (see ESP32 Technical Reference Manual)
   myfp2timer = timerBegin(0, 80, true);

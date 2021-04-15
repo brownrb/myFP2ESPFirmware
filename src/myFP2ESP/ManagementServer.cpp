@@ -1863,24 +1863,24 @@ void MANAGEMENT_handleadminpg1(void)
   }
 
   // if oled page time update
-  msg = mserver.arg("settm");
+  msg = mserver.arg("setpt");
   if ( msg != "" )
   {
     String tp = mserver.arg("pt");
     if ( tp != "" )
     {
-      unsigned long pgtime = tp.toInt();
-      if ( pgtime < MINOLEDPAGETIME )
+      long pgtime = tp.toInt();
+      if ( pgtime < LCDPAGETIMEMIN )
       {
-        pgtime = MINOLEDPAGETIME;                       // at least 2s
+        pgtime = LCDPAGETIMEMIN;                       // at least 2s
       }
-      else if ( pgtime > MAXOLEDPAGETIME )
+      else if ( pgtime > LCDPAGETIMEMAX )
       {
-        pgtime = MAXOLEDPAGETIME;
+        pgtime = LCDPAGETIMEMAX;
       }
       MSrvr_DebugPrint(SETPGTIMESTR);
       MSrvr_DebugPrintln(msg);
-      mySetupData->set_lcdpagetime(pgtime);
+      mySetupData->set_lcdpagetime((byte)pgtime);
     }
     else
     {
